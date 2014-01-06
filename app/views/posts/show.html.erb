@@ -1,5 +1,26 @@
-<h3><%= @post.title %></h3>
-<h5>Url: <%= @post.url %></h5>
-<p><%= @post.description %></p>
+<div class='row'>
+  <div class='span12'>
 
-<%= link_to 'go back to all posts', posts_path %>
+    <p><%= render @post.categories %></p>
+    <%= render 'shared/content_title', title: @post.title %>
+
+    <p><%= @post.description %></p>
+    <hr/>
+    <h5>Comments:</h5>
+  </div>
+</div>
+
+<% @post.comments.each do |comment| %>
+  <div class='row'>
+    <div class='well span8'>
+      <p>
+        <em><%= comment.body %></em>
+      </p>
+      <p>
+        <span class='quiet'>by</span>
+        <%= link_to comment.creator.username, comment.post.url %>
+        <small>at <%= comment.created_at %></small>
+      </p>
+    </div>
+  </div>
+<% end %>
