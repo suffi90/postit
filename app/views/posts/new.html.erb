@@ -1,0 +1,10 @@
+<h4>Rails model-backed form helpers</h4>
+<%= form_for @post do |f| %>
+  <%= f.label :title %>
+  <%= f.text_field :title %> <!-- cannot use f.text_field :whatever -->
+  <br/>
+  <%= f.label :url %>
+  <%= f.text_field :url %>
+  <br/>
+  <%= f.submit "Create Post", class: 'btn btn-primary' %>
+<% end %>
