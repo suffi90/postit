@@ -1,26 +1,24 @@
 <div class='row'>
   <div class='span12'>
-
     <p><%= render @post.categories %></p>
-    <%= render 'shared/content_title', title: @post.title %>
-
+    <%= render 'shared/content_title', title: @post.title, url: @post.url %>
     <p><%= @post.description %></p>
     <hr/>
+    <%= render 'comments/form', post_comment_arr: [@post, @comment] %>
     <h5>Comments:</h5>
+    <% @post.comments.each do |comment| %>
+      <div class='row'>
+        <div class='well span8'>
+          <p>
+            <em><%= comment.body %></em>
+          </p>
+          <p>
+            <span class='quiet'>by</span>
+            <%= link_to comment.creator.username, comment.post.url %>
+            <small>at <%= comment.created_at %></small>
+          </p>
+        </div>
+      </div>
+    <% end %>
   </div>
 </div>
-
-<% @post.comments.each do |comment| %>
-  <div class='row'>
-    <div class='well span8'>
-      <p>
-        <em><%= comment.body %></em>
-      </p>
-      <p>
-        <span class='quiet'>by</span>
-        <%= link_to comment.creator.username, comment.post.url %>
-        <small>at <%= comment.created_at %></small>
-      </p>
-    </div>
-  </div>
-<% end %>

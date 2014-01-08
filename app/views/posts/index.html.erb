@@ -1,4 +1,4 @@
-<%= render 'shared/content_title', title: 'All Posts' %>
+<%= render 'shared/content_title', title: 'All Posts', url: nil %>
 
 <% @posts.each do |post| %>
   <div class='row'>
@@ -10,7 +10,7 @@
         <span class='quiet'>posted by</span>
         <%= post.creator.username %>
         <small>at <%= post.created_at %></small>
-        <small>
+        (<%= link_to 'edit', edit_post_path(post) %>)
       </p>
       <p>
         <small>

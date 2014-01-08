@@ -1,4 +1,8 @@
 <p class='lead'>
-  <%= title %>
+  <% if url %>
+    <%= link_to title, url %>
+  <% else %>
+    <%= title %>
+  <% end %>
 </p>
 <hr/>
