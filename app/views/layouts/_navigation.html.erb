@@ -6,13 +6,17 @@
     <%= link_to 'All Posts', posts_path %>
   </li>
   <li class='btn-group'>
-    <a class='btn btn-small dropdown-toggle' data-toggle='dropdown' href='#'>
+    <%= link_to '#', class: 'btn btn-small dropdown-toggle', 'data-toggle' => 'dropdown' do %>
       Categories
       <span class='caret'></span>
-    </a>
+    <% end %>
     <ul class='dropdown-menu'>
+      <% Category.all.sort_by{|c| c[:name]}.each do |category| %>
+        <li><%= link_to category.name, category_path(category) %>
+      <% end %>
+      <li class='divider'></li>
       <li>
-        <%= link_to(new_category_path) do %>
+        <%= link_to new_category_path do %>
           <i class='icon-plus'></i> New Category
         <% end %>
       </li>

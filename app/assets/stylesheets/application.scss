@@ -83,3 +83,10 @@ div.comment_votes {
   position: relative;
   top: -3px;
 }
+
+span.badge a {
+  color: #fff;
+  &:hover {
+    text-decoration: none;
+  }
+}
