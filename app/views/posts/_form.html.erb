@@ -16,12 +16,7 @@
     </div>
     <div class='form-group'>
       <%= f.label :categories %>
-
-      <%= @categories.each do |category| %>
-        <%= f.fields_for :categories, category do |c| %>
-          <%= c.check_box :name %> <%= category.name %>
-        <% end %>
-      <% end %>
+      <%= build_category_checkboxes f %>
     </div>
     <%= f.submit "Create Post", class: 'btn btn-primary' %>
   <% end %>

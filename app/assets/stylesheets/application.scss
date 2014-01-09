@@ -55,10 +55,10 @@ div.comment_votes {
 
   .btn-success {
     color: #fff;
-  }
-  .btn-success:hover {
-    background-color: #51a351;
-    color: #fff;
+    &:hover {
+      background-color: #51a351;
+      color: #fff;
+    }
   }
 
   .btn.dropdown-toggle {
@@ -73,4 +73,13 @@ div.comment_votes {
 
 .form-group {
   margin-bottom: 10px;
+}
+
+.badge {
+  margin-right: 5px;
+}
+
+.checkbox.inline input {
+  position: relative;
+  top: -3px;
 }
