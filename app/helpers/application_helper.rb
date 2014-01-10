@@ -3,7 +3,7 @@ module ApplicationHelper
     url.starts_with?('http://') ? url : "http://#{url}"
   end
 
-  def print_date(date)
-    Time.at(date.to_i).strftime("%I:%M%p on %B %d, %Y")
+  def print_date(dt)
+    dt.strftime("%I:%M%P on %B %d, %Y")
   end
 end

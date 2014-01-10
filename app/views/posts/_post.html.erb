@@ -7,7 +7,7 @@
       <p>
         <span class='quiet'>posted by</span>
         <%= post.creator.username %>
-        <small>at <%= print_date(post.created_at) %></small>
+        <small>at <%= print_date post.created_at %></small>
         (<%= link_to 'edit', edit_post_path(post) %>)
       </p>
       <p>
