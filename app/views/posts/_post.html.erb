@@ -2,12 +2,12 @@
   <div class='row'>
     <div class='span8 well'>
       <p><%= render post.categories %></p>
-      <h4><%= link_to post.title, post.url %></h4>
+      <h4><%= link_to post.title, fix_url(post.url), {target: '_blank'} %></h4>
       <p><%= post.description %></p>
       <p>
         <span class='quiet'>posted by</span>
         <%= post.creator.username %>
-        <small>at <%= post.created_at %></small>
+        <small>at <%= print_date(post.created_at) %></small>
         (<%= link_to 'edit', edit_post_path(post) %>)
       </p>
       <p>
