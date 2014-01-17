@@ -22,7 +22,19 @@
       </li>
     </ul>
   </li>
-  <li>
-    <%= link_to 'New Post', new_post_path, class: 'btn btn-success btn-small' %>
-  </li>
+  <% if logged_in? %>
+    <li class='btn-group'>
+      <%= link_to 'New Post', new_post_path, class: 'btn btn-success btn-small' %>
+    </li>
+    <li>
+      <%= link_to 'Logout', logout_path, class: 'btn btn-small' %>
+    </li>
+  <% else %>
+    <li class='btn-group'>
+      <%= link_to 'Register', register_path, class: 'btn btn-success btn-small' %>
+    </li>
+    <li>
+      <%= link_to 'Login', login_path, class: 'btn btn-small' %>
+    </li>
+  <% end %>
 </ul>
