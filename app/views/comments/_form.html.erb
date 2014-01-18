@@ -1,11 +1,13 @@
 <%= render 'shared/errors', error_obj: @comment %>
 
-<div id='comment-form'>
-  <%= form_for [@post, @comment] do |f| %>
-    <div class='form-group'>
-      <%= f.label :body, 'Leave a comment' %>
-      <%= f.text_area :body, class: 'span4', rows: 3 %>
-    </div>
-    <%= f.submit "Create comment", class: 'btn btn-primary' %>
-  <% end %>
-</div>
+<% if current_user %>
+  <div id='comment-form'>
+    <%= form_for [@post, @comment] do |f| %>
+      <div class='form-group'>
+        <%= f.label :body, 'Leave a comment' %>
+        <%= f.text_area :body, class: 'span4', rows: 3 %>
+      </div>
+      <%= f.submit "Create comment", class: 'btn btn-primary' %>
+    <% end %>
+  </div>
+<% end %>
