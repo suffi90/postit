@@ -1,8 +1,10 @@
 <div class='row'>
   <div class='span12'>
-    <p class='pull-right'>
-      [<%= link_to 'edit this post', edit_post_path(@post) %>]
-    </p>
+    <% if current_user == @post.creator %>
+      <p class='pull-right'>
+        [<%= link_to 'edit this post', edit_post_path(@post) %>]
+      </p>
+    <% end %>
     <p><%= render @post.categories %></p>
     <%= render 'shared/content_title', title: @post.title %>
     <p><%= @post.description %></p>
@@ -18,7 +20,7 @@
             </p>
             <p>
               <span class='quiet'>posted by</span>
-              <%= link_to comment.creator.username, '' %>
+              <%= link_to comment.creator.username, user_path(comment.creator) %>
               <small>at <%= print_date(comment.created_at) %></small>
             </p>
           </div>

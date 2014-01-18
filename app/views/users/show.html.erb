@@ -1,0 +1,26 @@
+<%= render 'shared/content_title', title: "Profile: #{@user.username}" %>
+
+<div class='well'>
+  <dl class='dl-horizontal'>
+    <dt>Username:</dt>
+    <dd><%= @user.username %></dd>
+    <dt>Time zone:</dt>
+    <dd><%= @user.time_zone %></dd>
+    <dt>Two factor auth:</dt>
+    <dd>Off</dd>
+    <dt>Phone:</dt>
+    <dd><%= @user.phone if @user == current_user %></dd>
+  </dl>
+</div>
+
+<% if !@user.posts.empty? && !@user.comments.empty? %>
+  <h5><%= @user.username %>'s Activity</h5>
+  <ul class='nav nav-tabs'>
+    <li class='active'>
+      <%= link_to "Posts (#{@user.posts.size})", '' %>
+    </li>
+    <li>
+      <%= link_to "Comments (#{@user.comments.size})", '' %>
+    </li>
+  </ul>
+<% end %>

@@ -6,9 +6,11 @@
       <p><%= post.description %></p>
       <p>
         <span class='quiet'>posted by</span>
-        <%= post.creator.username %>
+        <%= link_to post.creator.username, user_path(post.creator) %>
         <small>at <%= print_date post.created_at %></small>
-        (<%= link_to 'edit', edit_post_path(post) %>)
+        <% if current_user == post.creator %>
+          (<%= link_to 'edit', edit_post_path(post) %>)
+        <% end %>
       </p>
       <p>
         <small>
