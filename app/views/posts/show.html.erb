@@ -12,20 +12,7 @@
     <%= render 'comments/form' %>
     <% unless @post.comments.empty? %>
       <h5>Comments:</h5>
-      <% @post.comments.each do |comment| %>
-        <div class='row'>
-          <div class='well span8'>
-            <p>
-              <em><%= comment.body %></em>
-            </p>
-            <p>
-              <span class='quiet'>posted by</span>
-              <%= link_to comment.creator.username, user_path(comment.creator) %>
-              <small>at <%= print_date(comment.created_at) %></small>
-            </p>
-          </div>
-        </div>
-      <% end %>
+      <%= render @post.comments %>
     <% end %>
   </div>
 </div>

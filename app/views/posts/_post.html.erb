@@ -1,24 +1,22 @@
-<% @posts.each do |post| %>
-  <div class='row'>
-    <div class='span8 well'>
-      <p><%= render post.categories %></p>
-      <h4><%= link_to post.title, fix_url(post.url), {target: '_blank'} %></h4>
-      <p><%= post.description %></p>
-      <p>
-        <span class='quiet'>posted by</span>
-        <%= link_to post.creator.username, user_path(post.creator) %>
-        <small>at <%= print_date post.created_at %></small>
-        <% if current_user == post.creator %>
-          (<%= link_to 'edit', edit_post_path(post) %>)
-        <% end %>
-      </p>
-      <p>
-        <small>
-          <span>
-            <%= link_to("#{post.comments.size} comments", post_path(post)) %>
-          </span>
-        </small>
-      </p>
-    </div>
+<div class='row'>
+  <div class='span8 well'>
+    <p><%= render post.categories %></p>
+    <h4><%= link_to post.title, fix_url(post.url), {target: '_blank'} %></h4>
+    <p><%= post.description %></p>
+    <p>
+      <span class='quiet'>posted by</span>
+      <%= link_to post.creator.username, user_path(post.creator) %>
+      <small>at <%= print_date post.created_at %></small>
+      <% if current_user == post.creator %>
+        (<%= link_to 'edit', edit_post_path(post) %>)
+      <% end %>
+    </p>
+    <p>
+      <small>
+        <span>
+          <%= link_to("#{post.comments.size} comments", post_path(post)) %>
+        </span>
+      </small>
+    </p>
   </div>
-<% end %>
+</div>

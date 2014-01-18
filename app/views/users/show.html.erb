@@ -13,14 +13,18 @@
   </dl>
 </div>
 
-<% if !@user.posts.empty? && !@user.comments.empty? %>
-  <h5><%= @user.username %>'s Activity</h5>
-  <ul class='nav nav-tabs'>
-    <li class='active'>
-      <%= link_to "Posts (#{@user.posts.size})", '' %>
-    </li>
-    <li>
-      <%= link_to "Comments (#{@user.comments.size})", '' %>
-    </li>
-  </ul>
+<h5><%= @user.username %>'s Activity</h5>
+<ul class='nav nav-tabs'>
+  <li class='<%= 'active' if params[:tab].nil? %>'>
+    <%= link_to "Posts (#{@user.posts.size})", user_path(@user) %>
+  </li>
+  <li class='<%= 'active' if params[:tab] == 'comments' %>'>
+    <%= link_to "Comments (#{@user.comments.size})", user_path(@user, tab: 'comments') %>
+  </li>
+</ul>
+
+<% if params[:tab].nil? %>
+  <%= render @user.posts %>
+<% elsif params[:tab] == 'comments' %>
+  <%= render @user.comments, show_post: true %>
 <% end %>

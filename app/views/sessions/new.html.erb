@@ -4,11 +4,11 @@
   <%= form_tag '/login' do %>
     <div class='form-control'>
       <%= label_tag :username %>
-      <%= text_field_tag :username, params[:username] || '' %>
+      <%= text_field_tag :username, params[:username] %>
     </div>
     <div class='form-control'>
       <%= label_tag :password %>
-      <%= password_field_tag :password, params[:password] || '' %>
+      <%= password_field_tag :password, '' %>
     </div>
     <%= submit_tag 'Login', class: 'btn btn-success' %>
   <% end %>
