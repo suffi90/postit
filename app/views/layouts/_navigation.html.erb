@@ -14,12 +14,14 @@
       <% Category.all.sort_by{|c| c[:name]}.each do |category| %>
         <li><%= link_to category.name, category_path(category) %>
       <% end %>
-      <li class='divider'></li>
-      <li>
-        <%= link_to new_category_path do %>
-          <i class='icon-plus'></i> New Category
-        <% end %>
-      </li>
+      <% if logged_in? %>
+        <li class='divider'></li>
+        <li>
+          <%= link_to new_category_path do %>
+            <i class='icon-plus'></i> New Category
+          <% end %>
+        </li>
+      <% end %>
     </ul>
   </li>
   <% if logged_in? %>

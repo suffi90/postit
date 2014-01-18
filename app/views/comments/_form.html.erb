@@ -1,6 +1,6 @@
 <%= render 'shared/errors', error_obj: @comment %>
 
-<% if current_user %>
+<% if logged_in? %>
   <div id='comment-form'>
     <%= form_for [@post, @comment] do |f| %>
       <div class='form-group'>
