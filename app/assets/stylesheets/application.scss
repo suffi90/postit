@@ -96,3 +96,9 @@ span.badge a {
     text-decoration: none;
   }
 }
+
+.span0.well.text-center {
+  > p {
+    margin: 0;
+  }
+}

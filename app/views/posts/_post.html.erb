@@ -1,4 +1,21 @@
 <div class='row'>
+  <div class='span0 well text-center'>
+    <% if logged_in? %>
+      <p>
+        <%= link_to vote_post_path(post, vote: true), method: :post do %>
+          <i class='icon-arrow-up'></i>
+        <% end %>
+      </p>
+    <% end %>
+    <p><%= post.total_votes %> votes</p>
+    <% if logged_in? %>
+      <p>
+        <%= link_to vote_post_path(post, vote: false), method: :post do %>
+          <i class='icon-arrow-down'></i>
+        <% end %>
+      </p>
+    <% end %>
+  </div>
   <div class='span8 well'>
     <p><%= render post.categories %></p>
     <h4><%= link_to post.title, fix_url(post.url), {target: '_blank'} %></h4>
