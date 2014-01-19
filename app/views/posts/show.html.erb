@@ -10,9 +10,9 @@
     <p><%= @post.description %></p>
     <hr/>
     <%= render 'comments/form' %>
-    <% unless @post.comments.empty? %>
+    <% unless @comments.empty? %>
       <h5>Comments:</h5>
-      <%= render @post.comments %>
+      <%= render @comments %>
     <% end %>
   </div>
 </div>

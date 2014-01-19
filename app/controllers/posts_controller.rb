@@ -8,6 +8,7 @@ class PostsController < ApplicationController
 
   def show
     @comment = Comment.new
+    @comments = @post.comments.sort_by{ |comment| comment.total_votes }.reverse
   end
 
   def new

@@ -102,3 +102,13 @@ span.badge a {
     margin: 0;
   }
 }
+
+.comment-votes {
+  padding: 10px 12px;
+}
+
+.comment-body {
+  > p {
+    margin: 0;
+  }
+}
