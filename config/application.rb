@@ -22,5 +22,6 @@ module PostitTemplate
 
     # Tealeaf note: Bootstrap sass gem addition
     config.assets.precompile += %w(*.png *.jpg *.jpeg *.gif)
+    require 'voteable'
   end
 end

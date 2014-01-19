@@ -24,7 +24,7 @@
 </ul>
 
 <% if params[:tab].nil? %>
-  <%= render @user.posts %>
+  <%= render @posts %>
 <% elsif params[:tab] == 'comments' %>
-  <%= render @user.comments, show_post: true %>
+  <%= render @comments, show_post: true %>
 <% end %>

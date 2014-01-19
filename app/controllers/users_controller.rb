@@ -17,7 +17,10 @@ class UsersController < ApplicationController
     end
   end
 
-  def show; end
+  def show
+    @posts = @user.posts.sort_by{ |post| post.total_votes }.reverse
+    @comments = @user.comments.sort_by{ |comment| comment.total_votes }.reverse
+  end
 
   def edit; end
 
