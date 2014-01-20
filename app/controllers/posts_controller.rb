@@ -3,12 +3,12 @@ class PostsController < ApplicationController
   before_action :require_user, except: [:index, :show]
 
   def index
-    @posts = Post.all.sort_by{ |post| post.total_votes }.reverse
+    @posts = Post.all.sort_by { |post| post.total_votes }.reverse
   end
 
   def show
     @comment = Comment.new
-    @comments = @post.comments.sort_by{ |comment| comment.total_votes }.reverse
+    @comments = @post.comments.sort_by { |comment| comment.total_votes }.reverse
   end
 
   def new
