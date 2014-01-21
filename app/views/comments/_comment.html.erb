@@ -4,15 +4,15 @@
   <div class='span0 well text-center comment-votes'>
     <% if logged_in? %>
       <p>
-        <%= link_to vote_post_comment_path(comment.post, comment, vote: true), method: :post do %>
+        <%= link_to vote_post_comment_path(comment.post, comment, vote: true), remote: true, method: :post do %>
           <i class='icon-arrow-up'></i>
         <% end %>
       </p>
     <% end %>
-    <p><%= comment.total_votes %> votes</p>
+    <p><span id='comment-<%= comment.id %>-votes'><%= comment.total_votes %></span> votes</p>
     <% if logged_in? %>
       <p>
-        <%= link_to vote_post_comment_path(comment.post, comment, vote: false), method: :post do %>
+        <%= link_to vote_post_comment_path(comment.post, comment, vote: false), remote: true, method: :post do %>
           <i class='icon-arrow-down'></i>
         <% end %>
       </p>
