@@ -2,7 +2,7 @@ class CommentsController < ApplicationController
   before_action :require_user
 
   def create
-    @post = Post.find(params[:post_id])
+    @post = Post.find_by(slug: params[:post_id])
     @comment = @post.comments.build(params.require(:comment).permit(:body))
     @comment.creator = current_user
 
@@ -11,6 +11,7 @@ class CommentsController < ApplicationController
       redirect_to post_path(@post)
     else
       @post.reload
+      @comments = @post.comments.sort_by { |comment| comment.total_votes }.reverse
       render 'posts/show'
     end
   end

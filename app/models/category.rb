@@ -3,4 +3,14 @@ class Category < ActiveRecord::Base
   has_many :posts, through: :post_categories
 
   validates :name, presence: true, uniqueness: true, length: {minimum: 2}
+
+  after_validation :generate_slug
+
+  def generate_slug
+    self.slug = self.name.gsub(/[^a-zA-Z0-9 -]/, '').gsub(' ', '-').downcase
+  end
+
+  def to_param
+    self.slug
+  end
 end

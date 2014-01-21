@@ -10,4 +10,14 @@ class Post < ActiveRecord::Base
   validates :title, presence: true, length: {minimum: 5}
   validates :url, presence: true, uniqueness: true
   validates :description, presence: true, length: {minimum: 5}
+
+  after_validation :generate_slug
+
+  def generate_slug
+    self.slug = self.title.gsub(/[^a-zA-Z0-9 -]/, '').gsub(' ', '-').downcase
+  end
+
+  def to_param
+    self.slug
+  end
 end
