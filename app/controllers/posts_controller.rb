@@ -27,7 +27,9 @@ class PostsController < ApplicationController
     end
   end
 
-  def edit; end
+  def edit
+    access_denied unless current_user == @post.creator || current_user.admin?
+  end
 
   def update
     if @post.update(post_params)

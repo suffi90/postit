@@ -24,7 +24,7 @@
       <span class='quiet'>posted by</span>
       <%= link_to post.creator.username, user_path(post.creator) %>
       <small>at <%= print_date post.created_at %></small>
-      <% if current_user == post.creator %>
+      <% if logged_in? && (current_user == post.creator || current_user.admin?) %>
         (<%= link_to 'edit', edit_post_path(post) %>)
       <% end %>
     </p>

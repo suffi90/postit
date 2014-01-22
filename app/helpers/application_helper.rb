@@ -4,6 +4,6 @@ module ApplicationHelper
   end
 
   def print_date(dt)
-    dt.strftime("%I:%M%P on %B %d, %Y")
+    dt.strftime("%I:%M%P %Z on %B %d, %Y")
   end
 end
