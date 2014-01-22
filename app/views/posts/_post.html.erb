@@ -7,7 +7,7 @@
         <% end %>
       </p>
     <% end %>
-    <p><span id='post-<%= post.id %>-votes'><%= post.total_votes %></span> votes</p>
+    <p><span id='post-<%= post.slug %>-votes'><%= post.total_votes %></span> votes</p>
     <% if logged_in? %>
       <p>
         <%= link_to vote_post_path(post, vote: false), remote: true, method: :post do %>
