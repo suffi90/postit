@@ -9,6 +9,16 @@ class PostsController < ApplicationController
   def show
     @comment = Comment.new
     @comments = @post.comments.sort_by { |comment| comment.total_votes }.reverse
+
+    respond_to do |format|
+      format.html
+      format.json do
+        render json: @post.to_json
+      end
+      format.xml do
+        render xml: @post.to_xml
+      end
+    end
   end
 
   def new
