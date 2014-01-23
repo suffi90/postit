@@ -45,7 +45,7 @@ class PostsController < ApplicationController
 
     respond_to do |format|
       format.html do
-        if vote.valid?
+        if @vote.valid?
           flash[:notice] = 'Your vote was counted.'
         else
           flash[:error] = 'You can only vote once.'
