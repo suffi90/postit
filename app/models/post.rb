@@ -12,4 +12,8 @@ class Post < ActiveRecord::Base
   validates :description, presence: true, length: {minimum: 5}
 
   sluggable_column :title
+
+  def response_post
+    { title: self.title, url: self.url, description: self.description }
+  end
 end

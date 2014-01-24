@@ -4,6 +4,12 @@ class PostsController < ApplicationController
 
   def index
     @posts = Post.all.sort_by { |post| post.total_votes }.reverse
+
+    respond_to do |format|
+      format.html
+      format.json { render json: @posts[0..9].map { |post| post.response_post } }
+      format.xml { render xml: @posts[0..9].map { |post| post.response_post } }
+    end
   end
 
   def show
@@ -12,12 +18,8 @@ class PostsController < ApplicationController
 
     respond_to do |format|
       format.html
-      format.json do
-        render json: @post.to_json
-      end
-      format.xml do
-        render xml: @post.to_xml
-      end
+      format.json { render json: @post.response_post }
+      format.xml { render xml: @post.response_post }
     end
   end
 
