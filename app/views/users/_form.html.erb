@@ -15,8 +15,9 @@
       <%= f.time_zone_select :time_zone, ActiveSupport::TimeZone.us_zones, :default => "Eastern Time (US & Canada)" %>
     </div>
     <div class='form-group'>
-      <%= f.label :phone, 'Phone Number (numbers only)' %>
-      <%= f.text_field :phone %>
+      <%= f.label :phone, 'Phone Number <small>(numbers only)</small>'.html_safe %>
+      <%= f.text_field :phone, maxlength: 9 %>
+      <i id="two-factor-phone" class='icon-question-sign'></i>
     </div>
     <%= f.submit(@user.new_record? ? 'Register' : 'Update Profile', class: 'btn btn-success') %>
   <% end %>
