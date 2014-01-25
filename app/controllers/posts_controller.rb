@@ -2,10 +2,13 @@ class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :vote]
   before_action :require_user, except: [:index, :show]
 
+  ITEMS_PER_PAGE = 10
+  PAGINATION_PER_PAGE = 10
+
   def index
     set_pagination
-    if !@pagination[:redirect_to_main]
-      @posts = Post.limit(ApplicationController::ITEMS_PER_PAGE)
+    if !@pagination[:redirect_to_first]
+      @posts = Post.limit(ITEMS_PER_PAGE)
         .offset(@pagination[:offset])
         .sort_by { |post| post.total_votes }.reverse
     else
@@ -86,8 +89,26 @@ class PostsController < ApplicationController
     @post = Post.find_by(slug: params[:id])
   end
 
+  def set_pagination
+    items_per_page = ITEMS_PER_PAGE
+    current_page = (params[:page] ||= 1).to_i
+    post_size = Post.count
+    if post_size % items_per_page == 0
+      page_count = post_size / items_per_page
+    else
+      page_count = post_size / items_per_page + 1
+    end
+    @pagination = {
+      current: current_page,
+      offset: (current_page - 1) * items_per_page,
+      page_count: page_count,
+      redirect_to_first: current_page < 1 || current_page > page_count,
+      pagination_range: set_pagination_range(current_page, page_count)
+    }
+  end
+
   def set_pagination_range(current_page, page_count)
-    pagination_limit = ApplicationController::PAGINATION_PER_PAGE
+    pagination_limit = PAGINATION_PER_PAGE
     return [*1..page_count] if page_count <= pagination_limit
 
     if current_page > pagination_limit/2
@@ -102,23 +123,5 @@ class PostsController < ApplicationController
     else
       [*1..pagination_limit]
     end
-  end
-
-  def set_pagination
-    items_per_page = ApplicationController::ITEMS_PER_PAGE
-    current_page = (params[:page] ||= 1).to_i
-    post_size = Post.count
-    if post_size % items_per_page == 0
-      page_count = post_size / items_per_page
-    else
-      page_count = post_size / items_per_page + 1
-    end
-    @pagination = {
-      current: current_page,
-      offset: (current_page - 1) * items_per_page,
-      page_count: page_count,
-      redirect_to_main: current_page < 1 || current_page > page_count,
-      pagination_range: set_pagination_range(current_page, page_count)
-    }
   end
 end
