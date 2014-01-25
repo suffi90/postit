@@ -1,0 +1,33 @@
+<% if @post_size > PostsController::POSTS_PER_PAGE %>
+  <div class='row'>
+    <div class='pagination pagination-centered'>
+      <ul>
+        <% if !@page_number || @page_number.to_i != 1 %>
+          <li>
+            <%= link_to '«', posts_path(page: @page_number.to_i-1) %>
+          </li>
+        <% else %>
+          <li class='disabled'>
+            <%= link_to '«', '' %>
+          </li>
+        <% end %>
+
+        <% @pages.times do |i| %>
+          <li class="<%= 'active' if @page_number.to_i == i+1 %>">
+            <%= link_to i+1, posts_path(page: i+1) if i < PostsController::PAGINATION_LIMIT %>
+          </li>
+        <% end %>
+
+        <% if !@page_number || @page_number.to_i != @pages %>
+          <li>
+            <%= link_to '»', posts_path(page: @page_number.to_i+1) %>
+          </li>
+        <% else %>
+          <li class='disabled'>
+            <%= link_to '»', '' %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+<% end %>

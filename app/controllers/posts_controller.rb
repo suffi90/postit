@@ -1,14 +1,33 @@
 class PostsController < ApplicationController
+  POSTS_PER_PAGE = 10;
+  PAGINATION_LIMIT = 9;
+
   before_action :set_post, only: [:show, :edit, :update, :vote]
   before_action :require_user, except: [:index, :show]
 
   def index
-    @posts = Post.all.sort_by { |post| post.total_votes }.reverse
+    # @posts = Post.all.sort_by { |post| post.total_votes }.reverse
+    @post_size = Post.count
+    @page_number = params[:page]
+    @pages = @post_size / POSTS_PER_PAGE + 1
+    start_number = POSTS_PER_PAGE * (@page_number.to_i - 1)
+
+    if @page_number && @post_size > start_number
+      @posts = Post.limit(POSTS_PER_PAGE).offset(start_number)
+        .sort_by { |post| post.total_votes }.reverse
+    elsif !@page_number
+      @page_number = 1;
+      @posts = Post.limit(POSTS_PER_PAGE)
+        .sort_by { |post| post.total_votes }.reverse
+    else
+      redirect_to posts_path
+      return
+    end
 
     respond_to do |format|
       format.html
-      format.json { render json: @posts[0..9].map { |post| post.response_post } }
-      format.xml { render xml: @posts[0..9].map { |post| post.response_post } }
+      format.json { render json: @posts.map { |post| post.response_post } }
+      format.xml { render xml: @posts.map { |post| post.response_post } }
     end
   end
 
