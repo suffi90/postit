@@ -90,17 +90,16 @@ class PostsController < ApplicationController
   end
 
   def set_pagination
-    items_per_page = ITEMS_PER_PAGE
     current_page = (params[:page] ||= 1).to_i
     post_size = Post.count
-    if post_size % items_per_page == 0
-      page_count = post_size / items_per_page
+    if post_size % ITEMS_PER_PAGE == 0
+      page_count = post_size / ITEMS_PER_PAGE
     else
-      page_count = post_size / items_per_page + 1
+      page_count = post_size / ITEMS_PER_PAGE + 1
     end
     @pagination = {
       current: current_page,
-      offset: (current_page - 1) * items_per_page,
+      offset: (current_page - 1) * ITEMS_PER_PAGE,
       page_count: page_count,
       redirect_to_first: current_page < 1 || current_page > page_count,
       pagination_range: set_pagination_range(current_page, page_count)
@@ -108,20 +107,19 @@ class PostsController < ApplicationController
   end
 
   def set_pagination_range(current_page, page_count)
-    pagination_limit = PAGINATION_PER_PAGE
-    return [*1..page_count] if page_count <= pagination_limit
+    return [*1..page_count] if page_count <= PAGINATION_PER_PAGE
 
-    if current_page > pagination_limit/2
-      if page_count <= (current_page - pagination_limit/2 + pagination_limit)
-        min = page_count - pagination_limit + 1
+    if current_page > PAGINATION_PER_PAGE/2
+      if page_count <= (current_page - PAGINATION_PER_PAGE/2 + PAGINATION_PER_PAGE)
+        min = page_count - PAGINATION_PER_PAGE + 1
         max = page_count
       else
-        min = current_page - pagination_limit/2 + 1
-        max = min + pagination_limit - 1
+        min = current_page - PAGINATION_PER_PAGE/2 + 1
+        max = min + PAGINATION_PER_PAGE - 1
       end
       [*min..max]
     else
-      [*1..pagination_limit]
+      [*1..PAGINATION_PER_PAGE]
     end
   end
 end
