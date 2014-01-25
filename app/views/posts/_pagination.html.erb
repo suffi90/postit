@@ -1,10 +1,10 @@
-<% if @post_size > PostsController::POSTS_PER_PAGE %>
+<% if @pagination[:page_count] > 1 %>
   <div class='row'>
     <div class='pagination pagination-centered'>
       <ul>
-        <% if !@page_number || @page_number.to_i != 1 %>
+        <% if @pagination[:current] != 1 %>
           <li>
-            <%= link_to '«', posts_path(page: @page_number.to_i-1) %>
+            <%= link_to '«', posts_path(page: @pagination[:current]-1) %>
           </li>
         <% else %>
           <li class='disabled'>
@@ -12,15 +12,15 @@
           </li>
         <% end %>
 
-        <% @pages.times do |i| %>
-          <li class="<%= 'active' if @page_number.to_i == i+1 %>">
-            <%= link_to i+1, posts_path(page: i+1) if i < PostsController::PAGINATION_LIMIT %>
+        <% @pagination[:pagination_range].each do |i| %>
+          <li class="<%= 'active' if @pagination[:current] == i %>">
+            <%= link_to i, posts_path(page: i) %>
           </li>
         <% end %>
 
-        <% if !@page_number || @page_number.to_i != @pages %>
+        <% if @pagination[:current] != @pagination[:page_count] %>
           <li>
-            <%= link_to '»', posts_path(page: @page_number.to_i+1) %>
+            <%= link_to '»', posts_path(page: @pagination[:current]+1) %>
           </li>
         <% else %>
           <li class='disabled'>
