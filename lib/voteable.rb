@@ -2,11 +2,12 @@ module Voteable
   extend ActiveSupport::Concern
 
   included do
+    before_save :generate_total_votes!
     has_many :votes, as: :voteable
   end
 
-  def total_votes
-    up_votes - down_votes
+  def generate_total_votes!
+    self.total_votes = up_votes - down_votes
   end
 
   def up_votes

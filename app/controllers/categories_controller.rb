@@ -19,6 +19,6 @@ class CategoriesController < ApplicationController
 
   def show
     @category = Category.find_by(slug: params[:id])
-    @posts = @category.posts.sort_by { |post| post.total_votes }.reverse
+    @posts = @category.posts
   end
 end

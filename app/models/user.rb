@@ -1,5 +1,4 @@
 class User < ActiveRecord::Base
-  include Voteable
   include Sluggable
 
   has_many :posts

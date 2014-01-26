@@ -12,7 +12,7 @@
           </li>
         <% end %>
 
-        <% @pagination[:pagination_range].each do |i| %>
+        <% set_pagination_range(@pagination[:current], @pagination[:page_count]).each do |i| %>
           <li class="<%= 'active' if @pagination[:current] == i %>">
             <%= link_to i, posts_path(page: i) %>
           </li>

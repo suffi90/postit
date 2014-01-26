@@ -8,9 +8,7 @@ class PostsController < ApplicationController
   def index
     set_pagination
     if !@pagination[:redirect_to_first]
-      @posts = Post.limit(ITEMS_PER_PAGE)
-        .offset(@pagination[:offset])
-        .sort_by { |post| post.total_votes }.reverse
+      @posts = Post.limit_posts(ITEMS_PER_PAGE, @pagination[:offset])
     else
       redirect_to posts_path
       return
@@ -25,7 +23,7 @@ class PostsController < ApplicationController
 
   def show
     @comment = Comment.new
-    @comments = @post.comments.sort_by { |comment| comment.total_votes }.reverse
+    @comments = @post.comments
 
     respond_to do |format|
       format.html
@@ -65,6 +63,7 @@ class PostsController < ApplicationController
 
   def vote
     @vote = Vote.create(voteable: @post, creator: current_user, vote: params[:vote])
+    @post.save if @vote.valid?
 
     respond_to do |format|
       format.html do
@@ -101,25 +100,7 @@ class PostsController < ApplicationController
       current: current_page,
       offset: (current_page - 1) * ITEMS_PER_PAGE,
       page_count: page_count,
-      redirect_to_first: current_page < 1 || current_page > page_count,
-      pagination_range: set_pagination_range(current_page, page_count)
+      redirect_to_first: current_page < 1 || current_page > page_count
     }
-  end
-
-  def set_pagination_range(current_page, page_count)
-    return [*1..page_count] if page_count <= PAGINATION_PER_PAGE
-
-    if current_page > PAGINATION_PER_PAGE/2
-      if page_count <= (current_page - PAGINATION_PER_PAGE/2 + PAGINATION_PER_PAGE)
-        min = page_count - PAGINATION_PER_PAGE + 1
-        max = page_count
-      else
-        min = current_page - PAGINATION_PER_PAGE/2 + 1
-        max = min + PAGINATION_PER_PAGE - 1
-      end
-      [*min..max]
-    else
-      [*1..PAGINATION_PER_PAGE]
-    end
   end
 end

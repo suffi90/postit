@@ -1,7 +1,9 @@
 class Post < ActiveRecord::Base
   include Voteable
   include Sluggable
-  default_scope order('created_at DESC')
+
+  default_scope { order('total_votes DESC, created_at DESC') }
+  scope :limit_posts, -> (limit_n, offset_n) { limit(limit_n).offset(offset_n) }
 
   belongs_to :creator, foreign_key: 'user_id', class_name: 'User'
   has_many :comments

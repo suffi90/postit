@@ -11,7 +11,7 @@ class CommentsController < ApplicationController
       redirect_to post_path(@post)
     else
       @post.reload
-      @comments = @post.comments.sort_by { |comment| comment.total_votes }.reverse
+      @comments = @post.comments
       render 'posts/show'
     end
   end
@@ -19,6 +19,7 @@ class CommentsController < ApplicationController
   def vote
     @comment = Comment.find(params[:id])
     @vote = Vote.create(voteable: @comment, creator: current_user, vote: params[:vote])
+    @comment.save if @vote.valid?
 
     respond_to do |format|
       format.html do
