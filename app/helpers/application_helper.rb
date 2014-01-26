@@ -10,6 +10,14 @@ module ApplicationHelper
     dt.strftime("%I:%M%P %Z on %B %d, %Y")
   end
 
+  def two_auth_status(user)
+    if logged_in? && current_user == user
+      !user.phone.empty? ? 'On' : 'Off'
+    else
+      ''
+    end
+  end
+
   def set_pagination_range(current_page, page_count)
     pagination_per_page = PostsController::PAGINATION_PER_PAGE
     return [*1..page_count] if page_count <= pagination_per_page

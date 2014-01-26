@@ -7,7 +7,7 @@
     <dt>Time zone:</dt>
     <dd><%= @user.time_zone %></dd>
     <dt>Two factor auth:</dt>
-    <dd>Off</dd>
+    <dd><%= two_auth_status(@user) %></dd>
     <dt>Phone:</dt>
     <dd><%= @user.phone if @user == current_user %></dd>
   </dl>
