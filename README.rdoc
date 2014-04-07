@@ -1,24 +1,11 @@
+== PostIt
+
+A Reddit-like application built with Rails.
+
 == Getting Started
 
-1. Make sure you have rails version 4.0.2. Type "rails -v" to make sure.
-2. From this project directory, do "bundle install --without production"
-3. To start the server "rails server".
-4. Navigate your browser to localhost:3000.
-
-
-== Deploying to Heroku
-
-1. Download the Heroku Toolbelt.
-2. Go to Heroku.com and register.
-3. Issue "heroku login" to authenticate, with the credentials from previous step. Make sure it's a git repository, by issuing "git init", and also "git add", "git commit" your files.
-4. Then "heroku create" to create this app on heroku. This command also adds a "heroku" remote repository that you can push to.
-5. To deploy, issue "git push heroku master".
-6. You may need to run migrations on heroku afterwards, with "heroku run rake db:migrate".
-7. Other helpful heroku commands:
-  - heroku logs
-  - heroku logs -t
-  - heroku rename
-  - heroku restart
-  - heroku run console
-  - heroku help
-
+1. Check that you have ruby installed by running `ruby -v`
+2. Install `bundler` by running `gem install bundler`
+3. `cd` into root and run `bundle install --without production`
+4. To start the server, run `rails server`
+5. Navigate your browser to `localhost:3000`
