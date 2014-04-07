@@ -4,8 +4,8 @@ A Reddit-like application built with Rails.
 
 == Getting Started
 
-1. Check that you have ruby installed by running `ruby -v`
-2. Install `bundler` by running `gem install bundler`
-3. `cd` into root and run `bundle install --without production`
-4. To start the server, run `rails server`
-5. Navigate your browser to `localhost:3000`
+1. Check that you have ruby installed by running <tt>ruby -v</tt>
+2. Install <tt>bundler</tt> by running <tt>gem install bundler</tt>
+3. <tt>cd</tt> into root and run <tt>bundle install --without production</tt>
+4. To start the server, run <tt>rails server</tt>
+5. Navigate your browser to <tt>localhost:3000</tt>
